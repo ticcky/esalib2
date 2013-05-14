@@ -281,7 +281,7 @@ class PorterStemmer:
         if self.b[self.k] == 'l' and self.doublec(self.k) and self.m() > 1:
             self.k = self.k -1
 
-    def stem(self, p, i, j):
+    def stem(self, p, i=-1, j=-1):
         """In stem(p,i,j), p is a char pointer, and the string to be stemmed
         is from p[i] to p[j] inclusive. Typically i is zero and j is the
         offset to the last character of a string, (p[j+1] == '\0'). The
@@ -292,8 +292,8 @@ class PorterStemmer:
         """
         # copy the parameters into statics
         self.b = p
-        self.k = j
-        self.k0 = i
+        self.k = j if j != -1 else len(p) - 1
+        self.k0 = i if i != -1 else 0
         if self.k <= self.k0 + 1:
             return self.b # --DEPARTURE--
 
