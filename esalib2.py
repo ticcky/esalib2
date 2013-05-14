@@ -1,3 +1,17 @@
+#!/usr/bin/env python
+# coding: utf-8
+"""
+    esalib2.esalib2
+    ~~~~~~~~~~~~~~~
+
+    A description which can be long and explain the complete
+    functionality of this module even with indented code examples.
+    Class/Function however should not be documented here.
+
+    :copyright: Lukas Zilka (2013)
+    :license: Apache License Version 2.0, January 2004 http://www.apache.org/licenses
+"""
+
 import os
 import bz2
 import time
@@ -9,13 +23,10 @@ import datetime
 import re
 
 import xml.etree.cElementTree as ET
-
-#from mwlib.uparser import simpleparse
-
-#import mwlib
 import wiki_extractor
 import porter
 
+# run pdb when error occurs
 import pdberr
 pdberr.init()
 
@@ -407,7 +418,6 @@ class ESA(object):
         return res / math.sqrt(res_norm_v1 * res_norm_v2)
 
 
-
 def get_token_filter_chain():
     return [
             filter_lowercase,
@@ -415,6 +425,7 @@ def get_token_filter_chain():
             FilterStopwords.from_set(set(['a', 'the'])),
             filter_gibberish,
     ]
+
 
 def test_esa():
     esa = ESA("esa_bg.db", token_filter_chain=get_token_filter_chain())
@@ -431,6 +442,7 @@ def test_esa():
         v1 = esa.get_vector(w1)
         v2 = esa.get_vector(w2)
         print w1, w2, esa.similarity(v1, v2)
+
 
 def test_build_background():
     wsdi = WikidumpStreamDI('/xdisk/devel/esalib/enwiki-20130403-pages-articles.xml.bz2', limit=10000)
